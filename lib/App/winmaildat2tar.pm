@@ -1,11 +1,8 @@
 package App::winmaildat2tar;
-use 5.008001;
-use strict;
+use v5.14;
 use warnings;
 
 our $VERSION = "0.01";
-
-
 
 1;
 __END__
@@ -14,26 +11,26 @@ __END__
 
 =head1 NAME
 
-App::winmaildat2tar - It's new $module
+winmaildat2tar - Convert TNEF data (winmail.dat) to Tar format
 
 =head1 SYNOPSIS
 
-    use App::winmaildat2tar;
+    winmaildat2tar file
 
 =head1 DESCRIPTION
 
-App::winmaildat2tar is ...
-
-=head1 LICENSE
-
-Copyright (C) Kazumasa Utashiro.
-
-This library is free software; you can redistribute it and/or modify
-it under the same terms as Perl itself.
+This is dummy module.
 
 =head1 AUTHOR
 
-Kazumasa Utashiro E<lt>kaz@utashiro.comE<gt>
+Kazumasa Utashiro
+
+=head1 LICENSE
+
+Copyright 2020 Kazumasa Utashiro.
+
+This library is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.
 
 =cut
 
