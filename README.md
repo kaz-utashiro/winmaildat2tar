@@ -1,11 +1,11 @@
 [![Build Status](https://travis-ci.com/kaz-utashiro/winmaildat2tar.svg?branch=master)](https://travis-ci.com/kaz-utashiro/winmaildat2tar)
 # NAME
 
-winmaildat2tar - Convert TNEF data (winmail.dat) to Tar format
+winmaildat2tar - Convert winmail.dat (TNEF data) to Tar format
 
 # VERSION
 
-Version 0.01
+Version 0.02
 
 # SYNOPSIS
 
