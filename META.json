@@ -1,5 +1,5 @@
 {
-   "abstract" : "Convert winmail.dat (TNEF data) to Tar format",
+   "abstract" : "Convert winmail.dat (TNEF data) to another archive",
    "author" : [
       "Kazumasa Utashiro"
    ],
@@ -12,7 +12,7 @@
       "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
       "version" : 2
    },
-   "name" : "App-winmaildat2tar",
+   "name" : "App-winmaildat2xar",
    "no_index" : {
       "directory" : [
          "t",
@@ -56,16 +56,16 @@
    "release_status" : "unstable",
    "resources" : {
       "bugtracker" : {
-         "web" : "https://github.com/kaz-utashiro/winmaildat2tar/issues"
+         "web" : "https://github.com/kaz-utashiro/winmaildat2xar/issues"
       },
-      "homepage" : "https://github.com/kaz-utashiro/winmaildat2tar",
+      "homepage" : "https://github.com/kaz-utashiro/winmaildat2xar",
       "repository" : {
          "type" : "git",
-         "url" : "git://github.com/kaz-utashiro/winmaildat2tar.git",
-         "web" : "https://github.com/kaz-utashiro/winmaildat2tar"
+         "url" : "git://github.com/kaz-utashiro/winmaildat2xar.git",
+         "web" : "https://github.com/kaz-utashiro/winmaildat2xar"
       }
    },
-   "version" : "0.02",
+   "version" : "0.03",
    "x_authority" : "cpan:UTASHIRO",
    "x_contributors" : [
       "Kazumasa Utashiro <kaz@utashiro.com>"

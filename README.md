@@ -1,20 +1,21 @@
-[![Build Status](https://travis-ci.com/kaz-utashiro/winmaildat2tar.svg?branch=master)](https://travis-ci.com/kaz-utashiro/winmaildat2tar)
+[![Build Status](https://travis-ci.com/kaz-utashiro/winmaildat2xar.svg?branch=master)](https://travis-ci.com/kaz-utashiro/winmaildat2xar)
 # NAME
 
-winmaildat2tar - Convert winmail.dat (TNEF data) to Tar format
+winmaildat2xar - Convert winmail.dat (TNEF data) to another archive
 
 # VERSION
 
-Version 0.02
+Version 0.03
 
 # SYNOPSIS
 
-$ winmaildat2tar winmail.dat | tar tvf -
+$ winmaildat2xar winmail.dat | tar tvf -
 
 # DESCRIPTION
 
-This command read `winmail.dat` file in TNEF format and produce tar
-archive formatted data.
+This command read `winmail.dat` file in TNEF format and produce
+another archive formatted data.  Only tar format is supported
+currently.
 
 # INSTALL
 
@@ -22,11 +23,11 @@ archive formatted data.
 
 To get the latest code, use this:
 
-    $ cpanm https://github.com/kaz-utashiro/winmaildat2tar.git
+    $ cpanm https://github.com/kaz-utashiro/winmaildat2xar.git
 
 # SEE ALSO
 
-[https://github.com/kaz-utashiro/winmaildat2tar](https://github.com/kaz-utashiro/winmaildat2tar)
+[https://github.com/kaz-utashiro/winmaildat2xar](https://github.com/kaz-utashiro/winmaildat2xar)
 
 # AUTHOR
 

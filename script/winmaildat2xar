@@ -38,20 +38,21 @@ __END__
 
 =head1 NAME
 
-winmaildat2tar - Convert winmail.dat (TNEF data) to Tar format
+winmaildat2xar - Convert winmail.dat (TNEF data) to another archive
 
 =head1 VERSION
 
-Version 0.02
+Version 0.03
 
 =head1 SYNOPSIS
 
-$ winmaildat2tar winmail.dat | tar tvf -
+$ winmaildat2xar winmail.dat | tar tvf -
 
 =head1 DESCRIPTION
 
-This command read C<winmail.dat> file in TNEF format and produce tar
-archive formatted data.
+This command read C<winmail.dat> file in TNEF format and produce
+another archive formatted data.  Only tar format is supported
+currently.
 
 =head1 INSTALL
 
@@ -59,11 +60,11 @@ archive formatted data.
 
 To get the latest code, use this:
 
-    $ cpanm https://github.com/kaz-utashiro/winmaildat2tar.git
+    $ cpanm https://github.com/kaz-utashiro/winmaildat2xar.git
 
 =head1 SEE ALSO
 
-L<https://github.com/kaz-utashiro/winmaildat2tar>
+L<https://github.com/kaz-utashiro/winmaildat2xar>
 
 =head1 AUTHOR
 
