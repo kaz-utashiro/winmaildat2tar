@@ -56,13 +56,13 @@
    "release_status" : "unstable",
    "resources" : {
       "bugtracker" : {
-         "web" : "https://github.com/kaz-utashiro/App-winmaildat2tar/issues"
+         "web" : "https://github.com/kaz-utashiro/winmaildat2tar/issues"
       },
-      "homepage" : "https://github.com/kaz-utashiro/App-winmaildat2tar",
+      "homepage" : "https://github.com/kaz-utashiro/winmaildat2tar",
       "repository" : {
          "type" : "git",
-         "url" : "git://github.com/kaz-utashiro/App-winmaildat2tar.git",
-         "web" : "https://github.com/kaz-utashiro/App-winmaildat2tar"
+         "url" : "git://github.com/kaz-utashiro/winmaildat2tar.git",
+         "web" : "https://github.com/kaz-utashiro/winmaildat2tar"
       }
    },
    "version" : "0.01",

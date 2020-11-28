@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.com/kaz-utashiro/App-winmaildat2tar.svg?branch=master)](https://travis-ci.com/kaz-utashiro/App-winmaildat2tar)
+[![Build Status](https://travis-ci.com/kaz-utashiro/winmaildat2tar.svg?branch=master)](https://travis-ci.com/kaz-utashiro/winmaildat2tar)
 # NAME
 
 winmaildat2tar - Convert TNEF data (winmail.dat) to Tar format
@@ -22,11 +22,11 @@ archive formatted data.
 
 To get the latest code, use this:
 
-    $ cpanm https://github.com/kaz-utashiro/App-winmaildat2tar.git
+    $ cpanm https://github.com/kaz-utashiro/winmaildat2tar.git
 
 # SEE ALSO
 
-[https://github.com/kaz-utashiro/App-winmaildat2tar](https://github.com/kaz-utashiro/App-winmaildat2tar)
+[https://github.com/kaz-utashiro/winmaildat2tar](https://github.com/kaz-utashiro/winmaildat2tar)
 
 # AUTHOR
 

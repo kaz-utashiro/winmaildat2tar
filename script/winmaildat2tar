@@ -55,11 +55,11 @@ archive formatted data.
 
 To get the latest code, use this:
 
-    $ cpanm https://github.com/kaz-utashiro/App-winmaildat2tar.git
+    $ cpanm https://github.com/kaz-utashiro/winmaildat2tar.git
 
 =head1 SEE ALSO
 
-L<https://github.com/kaz-utashiro/App-winmaildat2tar>
+L<https://github.com/kaz-utashiro/winmaildat2tar>
 
 =head1 AUTHOR
 
