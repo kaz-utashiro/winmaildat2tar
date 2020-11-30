@@ -2,41 +2,9 @@
 
 use v5.14;
 use warnings;
-use Convert::TNEF;
 use App::winmaildat2tar;
 
-sub usage {
-    die sprintf "Usage: %s winmail.dat\n", $0 =~ s|.*/||r;
-}
-@ARGV > 0 or usage;
-
-use Getopt::EX::Long qw(:DEFAULT Configure ExConfigure);
-ExConfigure BASECLASS => [ __PACKAGE__, "Getopt::EX" ];
-Configure "bundling";
-GetOptions(
-    my $opt = {
-	format => 'tar',
-    },
-    "format=s",
-    );
-
-sub unknown {
-    my $seq = (state $_seq)++;
-    sprintf "unknown%s.dat", $seq ? "_$seq" : "";
-}
-
-my $archive = App::winmaildat2tar::Archive->new($opt->{format});
-
-for my $file (@ARGV) {
-    my $tnef = Convert::TNEF->read_in($file, { output_to_core => 'ALL' })
-	or die $Convert::TNEF::errstr;
-    for my $ent ($tnef->attachments) {
-	my $name = $ent->longname // $ent->name // unknown;
-	$archive->add($name, $ent->data);
-    }
-}
-
-print $archive->write;
+App::winmaildat2tar->new->run(@ARGV);
 
 exit;
 
@@ -50,23 +18,23 @@ winmaildat2tar - Convert winmail.dat (TNEF data) to tentative archive
 
 =head1 VERSION
 
-Version 0.05
+Version 0.06
 
 =head1 SYNOPSIS
 
-$ winmaildat2tar [--format format] winmail.dat | tar tvf -
+$ winmaildat2tar winmail.dat > winmail.tar
 
 =head1 DESCRIPTION
 
 This command read C<winmail.dat> file in TNEF format and produce
-another tentative archive formatted data.  Defaut format is Tar.
+another tentative archive formatted data (tar by default).
 
 =over 7
 
-=item B<--format> I<format>
+=item B<--format> I<format>, B<-f> ...
 
-Specify archive format from B<Tar>, B<Ar> or B<Zip>.
-Default is B<Tar>.
+Specify archive format from B<tar>, B<ar> or B<zip>.
+Default is B<tar>.
 
 =back
 

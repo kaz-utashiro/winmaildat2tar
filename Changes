@@ -2,6 +2,10 @@ Revision history for Perl extension App-winmaildat2tar
 
 {{$NEXT}}
 
+0.06 2020-11-30T13:36:13Z
+
+    - Move script body to module.
+
 0.05 2020-11-30T05:05:59Z
 
     - Change command name back to winmaildat2tar

@@ -2,7 +2,53 @@ package App::winmaildat2tar;
 
 use v5.14;
 use warnings;
-our $VERSION = "0.05";
+our $VERSION = "0.06";
+
+my $default_format = $0 =~ /2(\w+)$/ ? $1 : 'tar';
+
+sub new {
+    my $class = shift;
+    my $obj = bless { format => $default_format }, $class;
+}
+
+sub run {
+    my $obj = shift;
+    local @ARGV = @_ or usage();
+
+    use Getopt::EX::Long qw(:DEFAULT Configure ExConfigure);
+    ExConfigure BASECLASS => [ __PACKAGE__, "Getopt::EX" ];
+    Configure "bundling";
+    GetOptions($obj, "format|f=s");
+
+    my $archive = App::winmaildat2tar::Archive->new($obj->{format});
+
+    for my $file (@ARGV) {
+	use Convert::TNEF;
+	my $tnef = Convert::TNEF->read_in($file, { output_to_core => 'ALL' })
+	    or die $Convert::TNEF::errstr;
+	for my $ent ($tnef->attachments) {
+	    my $name = $ent->longname // $ent->name // unknown();
+	    $archive->add($name, $ent->data);
+	}
+    }
+
+    print $archive->write;
+
+    exit;
+}
+
+sub usage {
+    die sprintf "Usage: %s winmail.dat\n", $0 =~ s|.*/||r;
+}
+
+sub unknown {
+    my $seq = (state $_seq)++;
+    sprintf "unknown%s.dat", $seq ? "_$seq" : "";
+}
+
+1;
+
+######################################################################
 
 package App::winmaildat2tar::Archive {
     use v5.14;
@@ -10,7 +56,7 @@ package App::winmaildat2tar::Archive {
     sub new {
 	my $class = shift;
 	my $format = shift;
-	$format =~ s/^([a-z])([a-z]*)$/\u$1\L$2/i
+	$format =~ s/^([a-z\d])([a-z\d]*)$/\u$1\L$2/i
 	    or die "$format: format error";
 	my $subclass = "$class::$format";
 	my $obj = bless { format => $format }, $subclass;
@@ -65,7 +111,7 @@ package App::winmaildat2tar::Archive::Zip {
     }
     sub write {
 	my $obj = shift;
-	open my $fh, ">", \(my $data) or die;
+	open my $fh, ">", \(my $data) or die "open: $!";
 	$obj->{archive}->writeToFileHandle($fh);
 	close $fh;
 	$data;

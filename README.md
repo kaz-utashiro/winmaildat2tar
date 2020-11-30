@@ -5,21 +5,21 @@ winmaildat2tar - Convert winmail.dat (TNEF data) to tentative archive
 
 # VERSION
 
-Version 0.05
+Version 0.06
 
 # SYNOPSIS
 
-$ winmaildat2tar \[--format format\] winmail.dat | tar tvf -
+$ winmaildat2tar winmail.dat > winmail.tar
 
 # DESCRIPTION
 
 This command read `winmail.dat` file in TNEF format and produce
-another tentative archive formatted data.  Defaut format is Tar.
+another tentative archive formatted data (tar by default).
 
-- **--format** _format_
+- **--format** _format_, **-f** ...
 
-    Specify archive format from **Tar**, **Ar** or **Zip**.
-    Default is **Tar**.
+    Specify archive format from **tar**, **ar** or **zip**.
+    Default is **tar**.
 
 # INSTALL
 
