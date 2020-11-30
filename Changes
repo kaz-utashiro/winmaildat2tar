@@ -2,6 +2,10 @@ Revision history for Perl extension App-winmaildat2xar
 
 {{$NEXT}}
 
+0.04 2020-11-30T04:33:03Z
+
+    - Support Tar, Ar and Zip format.
+
 0.03 2020-11-28T13:26:44Z
 
     - Change command name to winmaildat2xar

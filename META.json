@@ -42,8 +42,11 @@
       },
       "runtime" : {
          "requires" : {
+            "Archive::Ar" : "0",
             "Archive::Tar" : "0",
+            "Archive::Zip" : "0",
             "Convert::TNEF" : "0",
+            "Getopt::EX::Long" : "0",
             "perl" : "v5.14.0"
          }
       },
@@ -65,7 +68,7 @@
          "web" : "https://github.com/kaz-utashiro/winmaildat2xar"
       }
    },
-   "version" : "0.03",
+   "version" : "0.04",
    "x_authority" : "cpan:UTASHIRO",
    "x_contributors" : [
       "Kazumasa Utashiro <kaz@utashiro.com>"

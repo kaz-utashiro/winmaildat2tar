@@ -5,7 +5,7 @@ winmaildat2xar - Convert winmail.dat (TNEF data) to another archive
 
 # VERSION
 
-Version 0.03
+Version 0.04
 
 # SYNOPSIS
 

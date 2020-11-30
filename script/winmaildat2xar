@@ -3,32 +3,40 @@
 use v5.14;
 use warnings;
 use Convert::TNEF;
-use Archive::Tar;
+use App::winmaildat2xar;
 
 sub usage {
     die sprintf "Usage: %s winmail.dat\n", $0 =~ s|.*/||r;
 }
 @ARGV > 0 or usage;
 
+use Getopt::EX::Long qw(:DEFAULT Configure ExConfigure);
+ExConfigure BASECLASS => [ __PACKAGE__, "Getopt::EX" ];
+Configure "bundling";
+GetOptions(
+    my $obj = {
+	format => 'tar',
+    },
+    "format=s",
+    );
+
 sub unknown {
     my $seq = (state $_seq)++;
     sprintf "unknown%s.dat", $seq ? "_$seq" : "";
 }
 
-my $tar = Archive::Tar->new() or die $!;
+my $archive = App::winmaildat2xar::Archive->new($obj->{format});
 
 for my $file (@ARGV) {
     my $tnef = Convert::TNEF->read_in($file, { output_to_core => 'ALL' })
 	or die $Convert::TNEF::errstr;
     for my $ent ($tnef->attachments) {
 	my $name = $ent->longname // $ent->name // unknown;
-	$tar->add_data($name,
-		       $ent->data,
-		       { uname => 'nobody', gname => 'nogroup' });
+	$archive->add($name, $ent->data);
     }
 }
 
-print $tar->write;
+print $archive->write;
 
 exit;
 
@@ -42,7 +50,7 @@ winmaildat2xar - Convert winmail.dat (TNEF data) to another archive
 
 =head1 VERSION
 
-Version 0.03
+Version 0.04
 
 =head1 SYNOPSIS
 
