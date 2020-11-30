@@ -5,7 +5,7 @@ winmaildat2tar - Convert winmail.dat (TNEF data) to tentative archive
 
 # VERSION
 
-Version 0.06
+Version 0.07
 
 # SYNOPSIS
 
@@ -27,7 +27,11 @@ another tentative archive formatted data (tar by default).
 
 To get the latest code, use this:
 
-    $ cpanm https://github.com/kaz-utashiro/winmaildat2tar.git
+    cpanm https://github.com/kaz-utashiro/winmaildat2tar.git
+
+or
+
+    curl -sL http://cpanmin.us | perl - https://github.com/kaz-utashiro/winmaildat2tar.git
 
 # SEE ALSO
 

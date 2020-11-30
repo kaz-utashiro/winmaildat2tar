@@ -2,7 +2,7 @@ package App::winmaildat2tar;
 
 use v5.14;
 use warnings;
-our $VERSION = "0.06";
+our $VERSION = "0.07";
 
 my $default_format = $0 =~ /2(\w+)$/ ? $1 : 'tar';
 
@@ -13,15 +13,16 @@ sub new {
 
 sub run {
     my $obj = shift;
-    local @ARGV = @_ or usage();
+    local @ARGV = @_;
 
     use Getopt::EX::Long qw(:DEFAULT Configure ExConfigure);
     ExConfigure BASECLASS => [ __PACKAGE__, "Getopt::EX" ];
     Configure "bundling";
-    GetOptions($obj, "format|f=s");
+    GetOptions($obj, "format|f=s") or usage();
 
     my $archive = App::winmaildat2tar::Archive->new($obj->{format});
 
+    @ARGV or usage();
     for my $file (@ARGV) {
 	use Convert::TNEF;
 	my $tnef = Convert::TNEF->read_in($file, { output_to_core => 'ALL' })
@@ -55,11 +56,12 @@ package App::winmaildat2tar::Archive {
     use warnings;
     sub new {
 	my $class = shift;
-	my $format = shift;
-	$format =~ s/^([a-z\d])([a-z\d]*)$/\u$1\L$2/i
-	    or die "$format: format error";
-	my $subclass = "$class::$format";
-	my $obj = bless { format => $format }, $subclass;
+	my $format = my $submod = shift;
+	$submod =~ s/^([a-z\d])([a-z\d]*)$/\u$1\L$2/i
+	    or die "$format: invalid format.\n";
+	my $subclass = "$class::$submod";
+	my $obj = bless { format => $submod }, $subclass;
+	$obj->can('newarchive') or die "$format: unknown format.\n";
 	$obj->{archive} = $obj->newarchive;
 	$obj;
     }
