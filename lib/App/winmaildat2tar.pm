@@ -1,10 +1,10 @@
-package App::winmaildat2xar;
+package App::winmaildat2tar;
 
 use v5.14;
 use warnings;
-our $VERSION = "0.04";
+our $VERSION = "0.05";
 
-package App::winmaildat2xar::Archive {
+package App::winmaildat2tar::Archive {
     use v5.14;
     use warnings;
     sub new {
@@ -28,11 +28,11 @@ package App::winmaildat2xar::Archive {
     }
 }
 
-package App::winmaildat2xar::Archive::Tar {
+package App::winmaildat2tar::Archive::Tar {
     use v5.14;
     use warnings;
     use Archive::Tar;
-    our @ISA = qw(App::winmaildat2xar::Archive);
+    our @ISA = qw(App::winmaildat2tar::Archive);
     sub add {
 	my $obj = shift;
 	my($name, $data) = @_;
@@ -41,11 +41,11 @@ package App::winmaildat2xar::Archive::Tar {
     }
 }
 
-package App::winmaildat2xar::Archive::Ar {
+package App::winmaildat2tar::Archive::Ar {
     use v5.14;
     use warnings;
     use Archive::Ar;
-    our @ISA = qw(App::winmaildat2xar::Archive);
+    our @ISA = qw(App::winmaildat2tar::Archive);
     sub add {
 	my $obj = shift;
 	my($name, $data) = @_;
@@ -53,11 +53,11 @@ package App::winmaildat2xar::Archive::Ar {
     }
 }
 
-package App::winmaildat2xar::Archive::Zip {
+package App::winmaildat2tar::Archive::Zip {
     use v5.14;
     use warnings;
     use Archive::Zip;
-    our @ISA = qw(App::winmaildat2xar::Archive);
+    our @ISA = qw(App::winmaildat2tar::Archive);
     sub add {
 	my $obj = shift;
 	my($name, $data) = @_;
@@ -80,11 +80,11 @@ __END__
 
 =head1 NAME
 
-winmaildat2xar - Convert winmail.dat (TNEF data) to another archive
+winmaildat2tar - Convert winmail.dat (TNEF data) to tentative archive
 
 =head1 SYNOPSIS
 
-    winmaildat2xar file
+    winmaildat2tar file
 
 =head1 DESCRIPTION
 

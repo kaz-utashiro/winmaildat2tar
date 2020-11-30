@@ -1,5 +1,5 @@
-name = "App-winmaildat2xar"
-readme_from = "script/winmaildat2xar"
+name = "App-winmaildat2tar"
+readme_from = "script/winmaildat2tar"
 badges = ["travis-ci.com"]
 authority = "cpan:UTASHIRO"
 

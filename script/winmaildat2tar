@@ -3,7 +3,7 @@
 use v5.14;
 use warnings;
 use Convert::TNEF;
-use App::winmaildat2xar;
+use App::winmaildat2tar;
 
 sub usage {
     die sprintf "Usage: %s winmail.dat\n", $0 =~ s|.*/||r;
@@ -14,7 +14,7 @@ use Getopt::EX::Long qw(:DEFAULT Configure ExConfigure);
 ExConfigure BASECLASS => [ __PACKAGE__, "Getopt::EX" ];
 Configure "bundling";
 GetOptions(
-    my $obj = {
+    my $opt = {
 	format => 'tar',
     },
     "format=s",
@@ -25,7 +25,7 @@ sub unknown {
     sprintf "unknown%s.dat", $seq ? "_$seq" : "";
 }
 
-my $archive = App::winmaildat2xar::Archive->new($obj->{format});
+my $archive = App::winmaildat2tar::Archive->new($opt->{format});
 
 for my $file (@ARGV) {
     my $tnef = Convert::TNEF->read_in($file, { output_to_core => 'ALL' })
@@ -46,21 +46,29 @@ __END__
 
 =head1 NAME
 
-winmaildat2xar - Convert winmail.dat (TNEF data) to another archive
+winmaildat2tar - Convert winmail.dat (TNEF data) to tentative archive
 
 =head1 VERSION
 
-Version 0.04
+Version 0.05
 
 =head1 SYNOPSIS
 
-$ winmaildat2xar winmail.dat | tar tvf -
+$ winmaildat2tar [--format format] winmail.dat | tar tvf -
 
 =head1 DESCRIPTION
 
 This command read C<winmail.dat> file in TNEF format and produce
-another archive formatted data.  Only tar format is supported
-currently.
+another tentative archive formatted data.  Defaut format is Tar.
+
+=over 7
+
+=item B<--format> I<format>
+
+Specify archive format from B<Tar>, B<Ar> or B<Zip>.
+Default is B<Tar>.
+
+=back
 
 =head1 INSTALL
 
@@ -68,11 +76,11 @@ currently.
 
 To get the latest code, use this:
 
-    $ cpanm https://github.com/kaz-utashiro/winmaildat2xar.git
+    $ cpanm https://github.com/kaz-utashiro/winmaildat2tar.git
 
 =head1 SEE ALSO
 
-L<https://github.com/kaz-utashiro/winmaildat2xar>
+L<https://github.com/kaz-utashiro/winmaildat2tar>
 
 =head1 AUTHOR
 

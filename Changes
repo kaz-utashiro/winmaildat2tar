@@ -1,6 +1,10 @@
-Revision history for Perl extension App-winmaildat2xar
+Revision history for Perl extension App-winmaildat2tar
 
 {{$NEXT}}
+
+0.05 2020-11-30T05:05:59Z
+
+    - Change command name back to winmaildat2tar
 
 0.04 2020-11-30T04:33:03Z
 
