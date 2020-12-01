@@ -84,8 +84,8 @@ package App::winmaildat2tar::Archive::Tar {
     sub add {
 	my $obj = shift;
 	my($name, $data) = @_;
-	$obj->{archive}->add_data($name, $data,
-		       { uname => 'nobody', gname => 'nogroup' });
+	my $option = { uname => 'nobody', gname => 'nogroup' };
+	$obj->{archive}->add_data($name, $data, $option);
     }
 }
 
