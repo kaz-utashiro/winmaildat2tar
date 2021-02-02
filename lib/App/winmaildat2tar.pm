@@ -2,7 +2,7 @@ package App::winmaildat2tar;
 
 use v5.14;
 use warnings;
-our $VERSION = "0.07";
+our $VERSION = "0.08";
 
 my $default_format = $0 =~ /2(\w+)$/ ? $1 : 'tar';
 
