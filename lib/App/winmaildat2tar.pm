@@ -7,22 +7,20 @@ our $VERSION = "0.08";
 my $default_format = $0 =~ /2(\w+)$/ ? $1 : 'tar';
 
 use Moo;
-
 has format => ( is => 'ro',
 		default => $default_format );
-
 no Moo;
 
 sub run {
-    my $obj = shift;
+    my $app = shift;
     local @ARGV = @_;
 
     use Getopt::EX::Long qw(:DEFAULT Configure ExConfigure);
     ExConfigure BASECLASS => [ __PACKAGE__, "Getopt::EX" ];
     Configure "bundling";
-    GetOptions($obj, "format|f=s") or usage();
+    GetOptions($app, qw(format|f=s)) or usage();
 
-    my $archive = App::winmaildat2tar::Archive->new($obj->format);
+    my $archive = App::winmaildat2tar::Archive->new($app->format);
 
     @ARGV or usage();
     for my $file (@ARGV) {
@@ -59,7 +57,7 @@ package App::winmaildat2tar::Archive {
     use Data::Dumper;
 
     use Moo;
-    has format  => ( is => 'rw', required => 1 );
+    has format  => ( is => 'ro', required => 1 );
     has archive => ( is => 'rw' );
     around BUILDARGS => sub {
 	my ($orig, $class, $format) = @_;
@@ -74,12 +72,13 @@ package App::winmaildat2tar::Archive {
 	my $subclass = "$class\::$format";
 	bless $obj, $subclass;
 	$obj->can('newarchive') or die "$format: unknown format.\n";
-	$obj->archive($obj->newarchive);
+	$obj->newarchive or die;
     }
     no Moo;
 
     sub newarchive {
-	shift->module->new;
+	my $obj = shift;
+	$obj->archive($obj->module->new);
     }
     sub module {
 	sprintf "Archive::%s", shift->format;
