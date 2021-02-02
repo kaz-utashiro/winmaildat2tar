@@ -3,6 +3,7 @@ requires 'Archive::Tar';
 requires 'Archive::Zip';
 requires 'Convert::TNEF';
 requires 'Getopt::EX::Long';
+requires 'Moo';
 requires 'perl', 'v5.14.0';
 
 on configure => sub {

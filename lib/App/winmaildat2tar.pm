@@ -6,10 +6,12 @@ our $VERSION = "0.07";
 
 my $default_format = $0 =~ /2(\w+)$/ ? $1 : 'tar';
 
-sub new {
-    my $class = shift;
-    my $obj = bless { format => $default_format }, $class;
-}
+use Moo;
+
+has format => ( is => 'ro',
+		default => $default_format );
+
+no Moo;
 
 sub run {
     my $obj = shift;
@@ -20,7 +22,7 @@ sub run {
     Configure "bundling";
     GetOptions($obj, "format|f=s") or usage();
 
-    my $archive = App::winmaildat2tar::Archive->new($obj->{format});
+    my $archive = App::winmaildat2tar::Archive->new($obj->format);
 
     @ARGV or usage();
     for my $file (@ARGV) {
@@ -54,25 +56,36 @@ sub unknown {
 package App::winmaildat2tar::Archive {
     use v5.14;
     use warnings;
-    sub new {
-	my $class = shift;
-	my $format = my $submod = shift;
-	$submod =~ s/^([a-z\d])([a-z\d]*)$/\u$1\L$2/i
+    use Data::Dumper;
+
+    use Moo;
+    has format  => ( is => 'rw', required => 1 );
+    has archive => ( is => 'rw' );
+    around BUILDARGS => sub {
+	my ($orig, $class, $format) = @_;
+	$format =~ s/^([a-z\d])([a-z\d]*)$/\u$1\L$2/i
 	    or die "$format: invalid format.\n";
-	my $subclass = "$class::$submod";
-	my $obj = bless { format => $submod }, $subclass;
+	$class->$orig(format => $format);
+    };
+    sub BUILD {
+	my($obj, $args) = @_;
+	my $class = ref $obj;
+	my $format = $obj->format;
+	my $subclass = "$class\::$format";
+	bless $obj, $subclass;
 	$obj->can('newarchive') or die "$format: unknown format.\n";
-	$obj->{archive} = $obj->newarchive;
-	$obj;
+	$obj->archive($obj->newarchive);
     }
+    no Moo;
+
     sub newarchive {
 	shift->module->new;
     }
     sub module {
-	sprintf "Archive::%s", shift->{format};
+	sprintf "Archive::%s", shift->format;
     }
     sub write {
-	shift->{archive}->write;
+	shift->archive->write;
     }
 }
 
@@ -85,7 +98,7 @@ package App::winmaildat2tar::Archive::Tar {
 	my $obj = shift;
 	my($name, $data) = @_;
 	my $option = { uname => 'nobody', gname => 'nogroup' };
-	$obj->{archive}->add_data($name, $data, $option);
+	$obj->archive->add_data($name, $data, $option);
     }
 }
 
@@ -97,7 +110,7 @@ package App::winmaildat2tar::Archive::Ar {
     sub add {
 	my $obj = shift;
 	my($name, $data) = @_;
-	$obj->{archive}->add_data($name, $data);
+	$obj->archive->add_data($name, $data);
     }
 }
 
@@ -109,12 +122,12 @@ package App::winmaildat2tar::Archive::Zip {
     sub add {
 	my $obj = shift;
 	my($name, $data) = @_;
-	$obj->{archive}->addString($data, $name);
+	$obj->archive->addString($data, $name);
     }
     sub write {
 	my $obj = shift;
 	open my $fh, ">", \(my $data) or die "open: $!";
-	$obj->{archive}->writeToFileHandle($fh);
+	$obj->archive->writeToFileHandle($fh);
 	close $fh;
 	$data;
     }
