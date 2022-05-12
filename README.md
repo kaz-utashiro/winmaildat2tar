@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.com/kaz-utashiro/winmaildat2tar.svg?branch=master)](https://travis-ci.com/kaz-utashiro/winmaildat2tar)
+[![Actions Status](https://github.com/kaz-utashiro/winmaildat2tar/workflows/test/badge.svg)](https://github.com/kaz-utashiro/winmaildat2tar/actions) [![MetaCPAN Release](https://badge.fury.io/pl/App-winmaildat2tar.svg)](https://metacpan.org/release/App-winmaildat2tar)
 # NAME
 
 winmaildat2tar - Convert winmail.dat (TNEF data) to tentative archive
@@ -27,11 +27,11 @@ another tentative archive formatted data (tar by default).
 
 To get the latest code, use this:
 
-    cpanm https://github.com/kaz-utashiro/winmaildat2tar.git
+    cpanm App-winmaildat2tar
 
 or
 
-    curl -sL http://cpanmin.us | perl - https://github.com/kaz-utashiro/winmaildat2tar.git
+    cpanm https://github.com/kaz-utashiro/winmaildat2tar.git
 
 # SEE ALSO
 
@@ -43,7 +43,7 @@ Kazumasa Utashiro
 
 # LICENSE
 
-Copyright 2020 Kazumasa Utashiro.
+Copyright 2020-2022 Kazumasa Utashiro.
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself.
