@@ -20,20 +20,25 @@ sub run {
     Configure "bundling";
     GetOptions($app, qw(format|f=s)) or usage();
 
-    my $archive = App::winmaildat2tar::Archive->new($app->format);
+    my $archive;
 
     @ARGV or usage();
     for my $file (@ARGV) {
 	use Convert::TNEF;
 	my $tnef = Convert::TNEF->read_in($file, { output_to_core => 'ALL' })
 	    or die $Convert::TNEF::errstr;
-	for my $ent ($tnef->attachments) {
+	my @attachments = $tnef->attachments or do {
+	    warn "$file: no attachment data\n";
+	    next;
+	};
+	for my $ent (@attachments) {
 	    my $name = $ent->longname // $ent->name // unknown();
-	    $archive->add($name, $ent->data);
+	    ($archive //= App::winmaildat2tar::Archive->new($app->format))
+		->add($name, $ent->data);
 	}
     }
 
-    print $archive->write;
+    print $archive->write if $archive;
 
     exit;
 }
@@ -156,7 +161,7 @@ Kazumasa Utashiro
 
 =head1 LICENSE
 
-Copyright 2020 Kazumasa Utashiro.
+Copyright 2020- Kazumasa Utashiro.
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself.
