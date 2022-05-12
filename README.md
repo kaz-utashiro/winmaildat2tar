@@ -5,7 +5,7 @@ winmaildat2tar - Convert winmail.dat (TNEF data) to tentative archive
 
 # VERSION
 
-Version 0.08
+Version 0.99
 
 # SYNOPSIS
 

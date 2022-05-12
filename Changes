@@ -2,6 +2,12 @@ Revision history for Perl extension App-winmaildat2tar
 
 {{$NEXT}}
 
+0.99 2022-05-12T11:18:59Z
+
+    - release to CPAN
+    - check if attachments exist
+    - use Getopt::EX::Hashed for option processing
+
 0.08 2021-02-02T02:41:58Z
 
     - use Moo;
