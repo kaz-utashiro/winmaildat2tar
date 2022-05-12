@@ -2,7 +2,8 @@ requires 'Archive::Ar';
 requires 'Archive::Tar';
 requires 'Archive::Zip';
 requires 'Convert::TNEF';
-requires 'Getopt::EX::Long';
+requires 'Getopt::EX';
+requires 'Getopt::EX::Hashed';
 requires 'Moo';
 requires 'perl', 'v5.14.0';
 

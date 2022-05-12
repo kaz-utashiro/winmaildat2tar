@@ -4,21 +4,21 @@ use v5.14;
 use warnings;
 our $VERSION = "0.08";
 
+use Getopt::EX::Long qw(:DEFAULT Configure ExConfigure);
+ExConfigure BASECLASS => [ __PACKAGE__, "Getopt::EX" ];
+Configure "bundling";
+
 my $default_format = $0 =~ /2(\w+)$/ ? $1 : 'tar';
 
-use Moo;
-has format => ( is => 'ro',
-		default => $default_format );
-no Moo;
+use Getopt::EX::Hashed; {
+    has format => 'f =s', is => 'ro', default => $default_format;
+}
+no  Getopt::EX::Hashed;
 
 sub run {
     my $app = shift;
     local @ARGV = @_;
-
-    use Getopt::EX::Long qw(:DEFAULT Configure ExConfigure);
-    ExConfigure BASECLASS => [ __PACKAGE__, "Getopt::EX" ];
-    Configure "bundling";
-    GetOptions($app, qw(format|f=s)) or usage();
+    $app->getopt or usage();
 
     my $archive;
 
@@ -61,25 +61,25 @@ package App::winmaildat2tar::Archive {
     use warnings;
     use Data::Dumper;
 
-    use Moo;
-    has format  => ( is => 'ro', required => 1 );
-    has archive => ( is => 'rw' );
-    around BUILDARGS => sub {
-	my ($orig, $class, $format) = @_;
-	$format =~ s/^([a-z\d])([a-z\d]*)$/\u$1\L$2/i
-	    or die "$format: invalid format.\n";
-	$class->$orig(format => $format);
-    };
-    sub BUILD {
-	my($obj, $args) = @_;
-	my $class = ref $obj;
-	my $format = $obj->format;
-	my $subclass = "$class\::$format";
-	bless $obj, $subclass;
-	$obj->can('newarchive') or die "$format: unknown format.\n";
-	$obj->newarchive or die;
-    }
-    no Moo;
+    use Moo; {
+	has format  => ( is => 'ro', required => 1 );
+	has archive => ( is => 'rw' );
+	around BUILDARGS => sub {
+	    my ($orig, $class, $format) = @_;
+	    $format =~ s/^([a-z\d])([a-z\d]*)$/\u$1\L$2/i
+		or die "$format: invalid format.\n";
+	    $class->$orig(format => $format);
+	};
+	sub BUILD {
+	    my($obj, $args) = @_;
+	    my $class = ref $obj;
+	    my $format = $obj->format;
+	    my $subclass = "$class\::$format";
+	    bless $obj, $subclass;
+	    $obj->can('newarchive') or die "$format: unknown format.\n";
+	    $obj->newarchive or die;
+	}
+    } no Moo;
 
     sub newarchive {
 	my $obj = shift;
