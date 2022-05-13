@@ -25,9 +25,9 @@ another tentative archive formatted data (tar by default).
 
 ## CPANMINUS
 
-To get the latest code, use this:
+Install from CPAN
 
-    cpanm App-winmaildat2tar
+    cpanm App::winmaildat2tar
 
 or
 
@@ -35,7 +35,9 @@ or
 
 # SEE ALSO
 
-[https://github.com/kaz-utashiro/winmaildat2tar](https://github.com/kaz-utashiro/winmaildat2tar)
+[App::winmaildat2tar](https://metacpan.org/pod/App%3A%3Awinmaildat2tar), [https://github.com/kaz-utashiro/winmaildat2tar](https://github.com/kaz-utashiro/winmaildat2tar)
+
+[Convert::TNEF](https://metacpan.org/pod/Convert%3A%3ATNEF), [Archive::Tar](https://metacpan.org/pod/Archive%3A%3ATar), [Archive::Ar](https://metacpan.org/pod/Archive%3A%3AAr), [Archive::Zip](https://metacpan.org/pod/Archive%3A%3AZip)
 
 # AUTHOR
 

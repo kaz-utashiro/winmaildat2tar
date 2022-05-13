@@ -4,7 +4,7 @@ use v5.14;
 use warnings;
 use App::winmaildat2tar;
 
-App::winmaildat2tar->new->run(@ARGV);
+App::winmaildat2tar->new->run(splice @ARGV);
 
 exit;
 
@@ -42,9 +42,9 @@ Default is B<tar>.
 
 =head2 CPANMINUS
 
-To get the latest code, use this:
+Install from CPAN
 
-    cpanm App-winmaildat2tar
+    cpanm App::winmaildat2tar
 
 or
 
@@ -52,7 +52,9 @@ or
 
 =head1 SEE ALSO
 
-L<https://github.com/kaz-utashiro/winmaildat2tar>
+L<App::winmaildat2tar>, L<https://github.com/kaz-utashiro/winmaildat2tar>
+
+L<Convert::TNEF>, L<Archive::Tar>, L<Archive::Ar>, L<Archive::Zip>
 
 =head1 AUTHOR
 

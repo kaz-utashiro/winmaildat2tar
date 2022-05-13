@@ -16,8 +16,7 @@ use Getopt::EX::Hashed; {
 no  Getopt::EX::Hashed;
 
 sub run {
-    my $app = shift;
-    local @ARGV = @_;
+    (my $app, local @ARGV) = splice @_;
     $app->getopt or usage();
 
     my $archive;
@@ -130,7 +129,7 @@ package App::winmaildat2tar::Archive::Zip {
     }
     sub write {
 	my $obj = shift;
-	open my $fh, ">", \(my $data) or die "open: $!";
+	open my $fh, ">", \my $data or die "open: $!";
 	$obj->archive->writeToFileHandle($fh);
 	close $fh;
 	$data;
