@@ -16,10 +16,13 @@ $ winmaildat2tar winmail.dat > winmail.tar
 This command read `winmail.dat` file in TNEF format and produce
 another tentative archive formatted data (tar by default).
 
-- **--format** _format_, **-f** ...
+- **--format** **tar**|**zip**, **-f** ...
 
-    Specify archive format from **tar**, **ar** or **zip**.
-    Default is **tar**.
+    Specify archive format.  Default is **tar**.  Curretly **tar**, **ar**
+    and **zip** are supported.
+
+    If the command is executed as a name of _winmaildat2xxx_, _xxx_ part
+    is used as a format name.
 
 # INSTALL
 
