@@ -2,7 +2,7 @@ package App::winmaildat2tar;
 
 use v5.14;
 use warnings;
-our $VERSION = "0.99";
+our $VERSION = "0.9901";
 
 use Getopt::EX::Long qw(:DEFAULT Configure ExConfigure);
 ExConfigure BASECLASS => [ __PACKAGE__, "Getopt::EX" ];
