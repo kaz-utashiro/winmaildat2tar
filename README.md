@@ -3,13 +3,18 @@
 
 winmaildat2tar - Convert winmail.dat (TNEF data) to tentative archive
 
+# SYNOPSIS
+
+winmaildat2tar winmail.dat > winmail.tar
+
+Option
+
+    --format #, -f#  Archive format: tar, ar, zip (default: tar)
+    --verbose, -v    Show attachment name
+
 # VERSION
 
 Version 0.9901
-
-# SYNOPSIS
-
-$ winmaildat2tar winmail.dat > winmail.tar
 
 # DESCRIPTION
 
