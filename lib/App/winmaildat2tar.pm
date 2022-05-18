@@ -25,10 +25,10 @@ no  Getopt::EX::Hashed;
 sub run {
     (my $app, local @ARGV) = splice @_;
     $app->getopt or pod2usage();
+    @ARGV or pod2usage();
 
     my $archive;
 
-    @ARGV or usage();
     for my $file (@ARGV) {
 	use Convert::TNEF;
 	my $tnef = Convert::TNEF->read_in($file, { output_to_core => 'ALL' })
